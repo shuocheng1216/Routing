@@ -1,0 +1,10 @@
+1. protoc ./topo_graph.proto ./map_geometry.proto ./ geometry.proto --cpp_out=./
+2.g++ readFromTxt.cpp topo_graph.pb.cc map_geometry.pb.cc geometry.pb.cc -lprotobuf
+
+
+
+
+
+
+
+protoc ./routing.proto ./header.proto ./error_code.proto ./geometry.proto ./map_parking_space.proto ./map_geometry.proto ./map_id.proto --cpp_out=./

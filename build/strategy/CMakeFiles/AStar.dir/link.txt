@@ -1,0 +1,2 @@
+/usr/bin/ar qc libAStar.a CMakeFiles/AStar.dir/a_star_strategy.cc.o
+/usr/bin/ranlib libAStar.a

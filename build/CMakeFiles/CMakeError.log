@@ -1,0 +1,65 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1b8f4/fast && /usr/bin/make  -f CMakeFiles/cmTC_1b8f4.dir/build.make CMakeFiles/cmTC_1b8f4.dir/build
+make[1]: Entering directory '/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1b8f4.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_1b8f4.dir/src.c.o -c "/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/build/CMakeFiles/CMakeTmp/src.c"
+Linking C executable cmTC_1b8f4
+/home/chengshuo1216/application/cmake-3.18.0-Linux-x86_64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1b8f4.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_1b8f4.dir/src.c.o -o cmTC_1b8f4 
+CMakeFiles/cmTC_1b8f4.dir/src.c.o：在函数‘main’中：
+src.c:(.text+0x3c)：对‘pthread_create’未定义的引用
+src.c:(.text+0x48)：对‘pthread_detach’未定义的引用
+src.c:(.text+0x54)：对‘pthread_cancel’未定义的引用
+src.c:(.text+0x65)：对‘pthread_join’未定义的引用
+src.c:(.text+0x79)：对‘pthread_atfork’未定义的引用
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_1b8f4.dir/build.make:105: recipe for target 'cmTC_1b8f4' failed
+make[1]: *** [cmTC_1b8f4] Error 1
+make[1]: Leaving directory '/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/build/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_1b8f4/fast' failed
+make: *** [cmTC_1b8f4/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_70290/fast && /usr/bin/make  -f CMakeFiles/cmTC_70290.dir/build.make CMakeFiles/cmTC_70290.dir/build
+make[1]: Entering directory '/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_70290.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_70290.dir/CheckFunctionExists.c.o -c /home/chengshuo1216/application/cmake-3.18.0-Linux-x86_64/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_70290
+/home/chengshuo1216/application/cmake-3.18.0-Linux-x86_64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_70290.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_70290.dir/CheckFunctionExists.c.o -o cmTC_70290  -lpthreads 
+/usr/bin/ld: 找不到 -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_70290.dir/build.make:105: recipe for target 'cmTC_70290' failed
+make[1]: *** [cmTC_70290] Error 1
+make[1]: Leaving directory '/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/build/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_70290/fast' failed
+make: *** [cmTC_70290/fast] Error 2
+
+
+

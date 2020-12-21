@@ -1,0 +1,172 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/binary.h
+string
+-
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/log.h
+stdarg.h
+-
+binary.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/binary.h
+glog/logging.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/glog/logging.h
+glog/raw_logging.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/glog/raw_logging.h
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/node_with_range.h
+string
+-
+topo_node.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_node.h
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/routing_gflags.h
+gflags/gflags.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/gflags/gflags.h
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/strategy/a_star_strategy.cc
+algorithm
+-
+limits
+-
+queue
+-
+../routing_gflags.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/routing_gflags.h
+../topo_graph.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_graph.h
+a_star_strategy.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/strategy/a_star_strategy.h
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/strategy/a_star_strategy.h
+unordered_map
+-
+unordered_set
+-
+vector
+-
+strategy.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/strategy/strategy.h
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/strategy/strategy.h
+vector
+-
+../topo_graph.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_graph.h
+../topo_node.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_node.h
+../topo_range.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_range.h
+../node_with_range.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/node_with_range.h
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_graph.h
+memory
+-
+string
+-
+unordered_map
+-
+unordered_set
+-
+vector
+-
+log.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/log.h
+topo_node.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_node.h
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_graph/geometry.pb.h
+string
+-
+google/protobuf/stubs/common.h
+-
+google/protobuf/arena.h
+-
+google/protobuf/arenastring.h
+-
+google/protobuf/generated_message_util.h
+-
+google/protobuf/metadata.h
+-
+google/protobuf/message.h
+-
+google/protobuf/repeated_field.h
+-
+google/protobuf/extension_set.h
+-
+google/protobuf/unknown_field_set.h
+-
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_graph/map_geometry.pb.h
+string
+-
+google/protobuf/stubs/common.h
+-
+google/protobuf/arena.h
+-
+google/protobuf/arenastring.h
+-
+google/protobuf/generated_message_util.h
+-
+google/protobuf/metadata.h
+-
+google/protobuf/message.h
+-
+google/protobuf/repeated_field.h
+-
+google/protobuf/extension_set.h
+-
+google/protobuf/unknown_field_set.h
+-
+geometry.pb.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_graph/geometry.pb.h
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_graph/topo_graph.pb.h
+string
+-
+google/protobuf/stubs/common.h
+-
+google/protobuf/arena.h
+-
+google/protobuf/arenastring.h
+-
+google/protobuf/generated_message_util.h
+-
+google/protobuf/metadata.h
+-
+google/protobuf/message.h
+-
+google/protobuf/repeated_field.h
+-
+google/protobuf/extension_set.h
+-
+google/protobuf/generated_enum_reflection.h
+-
+google/protobuf/unknown_field_set.h
+-
+map_geometry.pb.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_graph/map_geometry.pb.h
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_node.h
+string
+-
+unordered_map
+-
+unordered_set
+-
+vector
+-
+topo_range.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_range.h
+topo_graph/topo_graph.pb.h
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_graph/topo_graph.pb.h
+
+/home/chengshuo1216/code/protocBuf/apollo_routing _camke_2/topo_range.h
+

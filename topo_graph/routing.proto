@@ -1,0 +1,192 @@
+syntax = "proto2";
+
+package dbu.routing;
+
+//import "header.proto";
+//import "geometry.proto";
+//import "error_code.proto";
+//import "map_parking_space.proto";
+
+message Polygon {
+  repeated PointENU point = 1;
+}
+
+message Id {
+  optional string id = 1;
+}
+
+
+message ParkingSpace {
+  optional Id id = 1;
+
+  optional Polygon polygon = 2;
+
+  repeated Id overlap_id = 3;
+
+  optional double heading = 4;
+}
+
+
+
+enum ErrorCode {
+  // No error, returns on success.
+  OK = 0;
+
+  // Control module error codes start from here.
+  CONTROL_ERROR = 1000;
+  CONTROL_INIT_ERROR = 1001;
+  CONTROL_COMPUTE_ERROR = 1002;
+
+  // Canbus module error codes start from here.
+  CANBUS_ERROR = 2000;
+  CAN_CLIENT_ERROR_BASE = 2100;
+  CAN_CLIENT_ERROR_OPEN_DEVICE_FAILED = 2101;
+  CAN_CLIENT_ERROR_FRAME_NUM = 2102;
+  CAN_CLIENT_ERROR_SEND_FAILED = 2103;
+  CAN_CLIENT_ERROR_RECV_FAILED = 2104;
+
+  // Localization module error codes start from here.
+  LOCALIZATION_ERROR = 3000;
+  LOCALIZATION_ERROR_MSG = 3100;
+  LOCALIZATION_ERROR_LIDAR = 3200;
+  LOCALIZATION_ERROR_INTEG = 3300;
+  LOCALIZATION_ERROR_GNSS = 3400;
+
+  // Perception module error codes start from here.
+  PERCEPTION_ERROR = 4000;
+  PERCEPTION_ERROR_TF = 4001;
+  PERCEPTION_ERROR_PROCESS = 4002;
+  PERCEPTION_FATAL = 4003;
+  PERCEPTION_ERROR_NONE = 4004;
+  PERCEPTION_ERROR_UNKNOWN = 4005;
+
+  // Prediction module error codes start from here.
+  PREDICTION_ERROR = 5000;
+
+  // Planning module error codes start from here
+  PLANNING_ERROR = 6000;
+  PLANNING_ERROR_NOT_READY = 6001;
+
+  // HDMap module error codes start from here
+  HDMAP_DATA_ERROR = 7000;
+
+  // Routing module error codes
+  ROUTING_ERROR = 8000;
+  ROUTING_ERROR_REQUEST = 8001;
+  ROUTING_ERROR_RESPONSE = 8002;
+  ROUTING_ERROR_NOT_READY = 8003;
+
+  // Indicates an input has been exhausted.
+  END_OF_INPUT = 9000;
+
+  // HTTP request error codes.
+  HTTP_LOGIC_ERROR = 10000;
+  HTTP_RUNTIME_ERROR = 10001;
+
+  // Relative Map error codes.
+  RELATIVE_MAP_ERROR = 11000;  // general relative map error code
+  RELATIVE_MAP_NOT_READY = 11001;
+
+  // Driver error codes.
+  DRIVER_ERROR_GNSS = 12000;
+  DRIVER_ERROR_VELODYNE = 13000;
+}
+
+message StatusPb {
+  optional ErrorCode error_code = 1 [default = OK];
+  optional string msg = 2;
+}
+
+message Header {
+  // Message publishing time in seconds.
+  optional double timestamp_sec = 1;
+
+  // Module name.
+  optional string module_name = 2;
+
+  // Sequence number for each message. Each module maintains its own counter for
+  // sequence_num, always starting from 1 on boot.
+  optional uint32 sequence_num = 3;
+
+  // Lidar Sensor timestamp for nano-second.
+  optional uint64 lidar_timestamp = 4;
+
+  // Camera Sensor timestamp for nano-second.
+  optional uint64 camera_timestamp = 5;
+
+  // Radar Sensor timestamp for nano-second.
+  optional uint64 radar_timestamp = 6;
+
+  // data version
+  optional uint32 version = 7 [default = 1];
+
+  optional StatusPb status = 8;
+
+  optional string frame_id = 9;
+}
+
+
+
+
+message PointENU {
+  optional double x = 1 [default = nan];  // East from the origin, in meters.
+  optional double y = 2 [default = nan];  // North from the origin, in meters.
+  optional double z = 3 [default = 0.0];  // Up from the WGS-84 ellipsoid, in
+                                          // meters.
+}
+
+
+message LaneWaypoint {
+  optional string id = 1;
+  optional double s = 2;
+  optional PointENU pose = 3;
+}
+
+message LaneSegment {
+  optional string id = 1;
+  optional double start_s = 2;
+  optional double end_s = 3;
+}
+
+message RoutingRequest {
+  optional apollo.common.Header header = 1;
+  // at least two points. The first is start point, the end is final point.
+  // The routing must go through each point in waypoint.
+  repeated LaneWaypoint waypoint = 2;
+  repeated LaneSegment blacklisted_lane = 3;
+  repeated string blacklisted_road = 4;
+  optional bool broadcast = 5 [default = true];
+  optional ParkingSpace parking_space = 6;
+}
+
+message Measurement {
+  optional double distance = 1;
+}
+
+enum ChangeLaneType {
+  FORWARD = 0;
+  LEFT = 1;
+  RIGHT = 2;
+};
+
+message Passage {
+  repeated LaneSegment segment = 1;
+  optional bool can_exit = 2;
+  optional ChangeLaneType change_lane_type = 3 [default = FORWARD];
+}
+
+message RoadSegment {
+  optional string id = 1;
+  repeated Passage passage = 2;
+}
+
+message RoutingResponse {
+  optional apollo.common.Header header = 1;
+  repeated RoadSegment road = 2;                 
+  optional Measurement measurement = 3;
+  optional RoutingRequest routing_request = 4;
+
+  // the map version which is used to build road graph
+  optional bytes map_version = 5;
+  optional StatusPb status = 6;
+}
